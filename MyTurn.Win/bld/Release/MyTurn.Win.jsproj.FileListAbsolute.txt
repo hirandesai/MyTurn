@@ -1,0 +1,9 @@
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bin\Release\resources.pri
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bin\Release\AppxManifest.xml
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bin\Release\MyTurn.Win.build.appxrecipe
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bld\Release\priconfig.xml
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bld\Release\layout.resfiles
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bld\Release\resources.resfiles
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bld\Release\pri.resfiles
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bld\Release\LanguageQualifiers.txt
+C:\Users\hiran.desai\Desktop\MyTurn\MyTurn.Win\bld\Release\ProjectArchitectures.txt

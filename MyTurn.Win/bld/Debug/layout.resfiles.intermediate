@@ -1,0 +1,13 @@
+css\default.css
+default.html
+images\logo.png
+images\smalllogo.png
+images\splashscreen.png
+images\storelogo.png
+js\default.js
+js\jquery.js
+js\jquery.signalR-2.1.2.min.js
+js\myturnhub.js
+js\navigator.js
+pages\items\items.css
+pages\items\items.html

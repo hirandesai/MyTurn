@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="630ec7cd27754ffba3e91369d8ab45aa" Name="Diagram1">
+        <EntityTypeShape EntityType="myturnModel.Device" Width="1.5" PointX="5.125" PointY="10.5" />
+        <EntityTypeShape EntityType="myturnModel.Group" Width="1.5" PointX="0.5" PointY="10.5" />
+        <EntityTypeShape EntityType="myturnModel.Toilet" Width="1.5" PointX="2.875" PointY="10.5" />
+        <AssociationConnector Association="myturnModel.FK_Devices_Toilets" />
+        <AssociationConnector Association="myturnModel.FK_Toilets_Groups" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

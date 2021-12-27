@@ -1,0 +1,24 @@
+﻿<!-- This template is used to display each item in the ListView declared below. -->
+<div class="listLayoutTopHeaderTemplate" data-win-control="WinJS.Binding.Template">
+    <div class="listLayoutTopHeaderTemplateRoot">
+        <div data-win-bind="innerHTML: title"></div>
+    </div>
+</div>
+<div class="itemtemplate" data-win-control="WinJS.Binding.Template">
+    <div class="item" data-win-bind="className: InUseClass">
+        <div class="item-overlay">
+            <h4 class="item-title" data-win-bind="textContent: ToiletIdentifier"></h4>
+        </div>
+    </div>
+</div>
+<!-- The content that will be loaded and displayed. -->
+<div class="itemspage fragment">
+    <header aria-label="Header content" role="banner">        
+        <h1 class="titlearea win-type-ellipsis">
+            <span class="pagetitle">It's My Turn</span>
+        </h1>
+    </header>
+    <section aria-label="Main content" role="main">
+        <div class="itemslist win-selectionstylefilled" aria-label="List of groups" data-win-control="WinJS.UI.ListView"></div>
+    </section>
+</div>

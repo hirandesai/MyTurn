@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="myturnModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="myturnModelStoreContainer">
+          <EntitySet Name="Devices" EntityType="myturnModel.Store.Devices" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Groups" EntityType="myturnModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Toilets" EntityType="myturnModel.Store.Toilets" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Devices_Toilets" Association="myturnModel.Store.FK_Devices_Toilets">
+            <End Role="Toilets" EntitySet="Toilets" />
+            <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toilets_Groups" Association="myturnModel.Store.FK_Toilets_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Toilets" EntitySet="Toilets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Identifier" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ToiletId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Toilets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Identifier" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="IsInUse" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Devices_Toilets">
+          <End Role="Toilets" Type="myturnModel.Store.Toilets" Multiplicity="0..1" />
+          <End Role="Devices" Type="myturnModel.Store.Devices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toilets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Devices">
+              <PropertyRef Name="ToiletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toilets_Groups">
+          <End Role="Groups" Type="myturnModel.Store.Groups" Multiplicity="1" />
+          <End Role="Toilets" Type="myturnModel.Store.Toilets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Toilets">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="myturnModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="myturnEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Devices" EntityType="myturnModel.Device" />
+          <EntitySet Name="Groups" EntityType="myturnModel.Group" />
+          <EntitySet Name="Toilets" EntityType="myturnModel.Toilet" />
+          <AssociationSet Name="FK_Devices_Toilets" Association="myturnModel.FK_Devices_Toilets">
+            <End Role="Toilet" EntitySet="Toilets" />
+            <End Role="Device" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Toilets_Groups" Association="myturnModel.FK_Toilets_Groups">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Toilet" EntitySet="Toilets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Identifier" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ToiletId" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Toilet" Relationship="myturnModel.FK_Devices_Toilets" FromRole="Device" ToRole="Toilet" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Toilets" Relationship="myturnModel.FK_Toilets_Groups" FromRole="Group" ToRole="Toilet" />
+        </EntityType>
+        <EntityType Name="Toilet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+          <Property Type="Boolean" Name="IsInUse" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="myturnModel.FK_Toilets_Groups" FromRole="Toilet" ToRole="Group" />
+        </EntityType>
+        <Association Name="FK_Devices_Toilets">
+          <End Type="myturnModel.Toilet" Role="Toilet" Multiplicity="0..1" />
+          <End Type="myturnModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Toilet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="ToiletId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Toilets_Groups">
+          <End Type="myturnModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="myturnModel.Toilet" Role="Toilet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Toilet">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="myturnModelStoreContainer" CdmEntityContainer="myturnEntities">
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="myturnModel.Device">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ToiletId" ColumnName="ToiletId" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="myturnModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toilets">
+            <EntityTypeMapping TypeName="myturnModel.Toilet">
+              <MappingFragment StoreEntitySet="Toilets">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsInUse" ColumnName="IsInUse" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
